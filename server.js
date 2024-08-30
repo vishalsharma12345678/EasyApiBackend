@@ -71,8 +71,9 @@ const job = schedule.scheduleJob("51 13 * * *", async function (fireDate) {
     });
   });
 });
-app.use((req, res) => {
+app.use((req, res, next) => {
   console.log(req.cookies);
+  next();
 });
 app.use("/api/auth", authRoute);
 app.use("/api/admin", auth, authRole(["admin"]), adminRoute);
