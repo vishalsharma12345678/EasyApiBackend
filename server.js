@@ -29,7 +29,7 @@ console.log(CLIENT_URL);
 //Cors Option
 const corsOption = {
   credentials: true,
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "https://easyapibackend.onrender.com"],
 };
 
 //Configuration
