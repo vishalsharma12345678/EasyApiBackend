@@ -24,7 +24,6 @@ const app = express();
 dbConnection();
 
 const { CLIENT_URL } = process.env;
-console.log(CLIENT_URL);
 
 //Cors Option
 const corsOption = {
@@ -71,6 +70,9 @@ const job = schedule.scheduleJob("51 13 * * *", async function (fireDate) {
       teamReport: teamreport,
     });
   });
+});
+app.use((req, res) => {
+  console.log(req.cookies);
 });
 app.use("/api/auth", authRoute);
 app.use("/api/admin", auth, authRole(["admin"]), adminRoute);
