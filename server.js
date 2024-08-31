@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("27 17 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("40 17 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
