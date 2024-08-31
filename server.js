@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("40 15 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("50 15 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
@@ -54,6 +54,7 @@ const job = schedule.scheduleJob("40 15 * * *", async function (fireDate) {
   });
   Array.from(leaderusers).forEach(async (u, index) => {
     const team = await teamService.findTeam({ leader: u._id });
+    console.log(team);
     const members = await userService.findUsers({ team: team._id });
     let teamreport = [];
     Array.from(members).forEach(async (member, index) => {
