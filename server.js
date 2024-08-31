@@ -41,7 +41,7 @@ const job = schedule.scheduleJob("57 18 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
-      ", but actually ran at " +
+      ", but actually  at " +
       new Date()
   );
   const users = await userModel.find({});
