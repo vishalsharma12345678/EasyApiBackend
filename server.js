@@ -83,6 +83,7 @@ const job = schedule.scheduleJob("40 17 * * *", async function (fireDate) {
         new Date(date).getFullYear(),
       teamReport: teamreport,
     });
+    console.log(result);
   });
 });
 app.use((req, res, next) => {

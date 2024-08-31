@@ -5,7 +5,7 @@ const ReportSchema = new Schema({
   employeeID: { type: Schema.Types.ObjectId, ref: "User", required: true },
   date: {
     type: String,
-    default: new Date().toLocaleDateString(),
+    required: true,
   },
   teamReport: [
     {
