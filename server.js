@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("35 16 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("27 17 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
@@ -46,10 +46,16 @@ const job = schedule.scheduleJob("35 16 * * *", async function (fireDate) {
   );
   const users = await userModel.find({});
   const leaderusers = await userModel.find({ type: "leader" });
-
+  let date = Date.now();
   Array.from(users).forEach(async (u, index) => {
     let userAttndenses = await attendanceModalNew.create({
       employeeID: u._id,
+      date:
+        new Date(date).getDate() +
+        "/" +
+        (new Date(date).getMonth() + 1) +
+        "/" +
+        new Date(date).getFullYear(),
     });
   });
   Array.from(leaderusers).forEach(async (u, index) => {
