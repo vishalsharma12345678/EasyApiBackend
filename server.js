@@ -37,12 +37,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("0 19 * * *", async function (fireDate) {
+schedule.scheduleJob("15 19 * * *", async function () {
   console.log(
-    "This job was supposed to run at " +
-      fireDate +
-      ", but actually  at " +
-      new Date()
+    "This job was supposed to run at " + ", but actually  at " + new Date()
   );
   const users = await userModel.find({});
   const leaderusers = await userModel.find({ type: "leader" });
