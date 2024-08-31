@@ -58,6 +58,8 @@ const job = schedule.scheduleJob("27 17 * * *", async function (fireDate) {
         new Date(date).getFullYear(),
     });
   });
+  date = Date.now();
+
   Array.from(leaderusers).forEach(async (u, index) => {
     const team = await teamService.findTeam({ leader: u._id });
     if (!team) return;
@@ -73,6 +75,12 @@ const job = schedule.scheduleJob("27 17 * * *", async function (fireDate) {
     });
     let result = await reportModal.create({
       employeeID: u._id,
+      data:
+        new Date(date).getDate() +
+        "/" +
+        (new Date(date).getMonth() + 1) +
+        "/" +
+        new Date(date).getFullYear(),
       teamReport: teamreport,
     });
   });
