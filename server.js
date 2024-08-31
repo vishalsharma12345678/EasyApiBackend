@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("54 17 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("58 17 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
@@ -75,7 +75,7 @@ const job = schedule.scheduleJob("54 17 * * *", async function (fireDate) {
     });
     let result = await reportModal.create({
       employeeID: u._id,
-      data:
+      date:
         new Date(date).getDate() +
         "/" +
         (new Date(date).getMonth() + 1) +
