@@ -14,7 +14,7 @@ class TeamDto {
     this.description = team.description;
     (this.image =
       team.image &&
-      `https://easyapibackend.onrender.com/storage/images/teams/${team.image}`),
+      `https://easyapibackend-elwu.onrender.com/storage/images/teams/${team.image}`),
       (this.admin = team.admin);
     this.status =
       team.status && team.status.charAt(0).toUpperCase() + team.status.slice(1);
