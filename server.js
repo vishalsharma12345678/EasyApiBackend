@@ -4,7 +4,6 @@ const PORT = process.env.PORT || 5500;
 const schedule = require("node-schedule");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 const dbConnection = require("./configs/db-config");
 const authRoute = require("./routes/auth-route");
 const adminRoute = require("./routes/admin-route");
@@ -27,8 +26,8 @@ const { CLIENT_URL } = process.env;
 
 //Cors Option
 const corsOption = {
+  origin: ["http://localhost:3000"],
   credentials: true,
-  origin: ["http://localhost:3000", "https://easyapibackend.onrender.com"],
 };
 
 //Configuration
