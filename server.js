@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-const job = schedule.scheduleJob("52 18 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("5 18 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
@@ -70,10 +70,7 @@ const job = schedule.scheduleJob("52 18 * * *", async function (fireDate) {
     });
   });
 });
-app.use((req, res, next) => {
-  console.log(req.cookies);
-  next();
-});
+
 app.use("/api/auth", authRoute);
 app.use("/api/admin", auth, authRole(["admin"]), adminRoute);
 app.use("/api/employee", auth, authRole(["employee", "leader"]), employeeRoute);
