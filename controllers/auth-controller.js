@@ -43,14 +43,16 @@ class AuthController {
     const { accessToken, refreshToken } = tokenService.generateToken(payload);
     await tokenService.storeRefreshToken(_id, refreshToken);
     res.cookie("accessToken", accessToken, {
-      SameSite: None,
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
+      sameSite: "None", // Ensures cookie is sent with cross-site requests
+      secure: true,
     });
     res.cookie("refreshToken", refreshToken, {
-      SameSite: None,
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true,
+      sameSite: "None", // Ensures cookie is sent with cross-site requests
+      secure: true,
     });
 
     // console.log(res);
