@@ -35,9 +35,8 @@ app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-
 // Routes
-const job = schedule.scheduleJob("03 18 * * *", async function (fireDate) {
+const job = schedule.scheduleJob("08 3 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
