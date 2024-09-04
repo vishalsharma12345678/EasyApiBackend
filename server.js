@@ -26,7 +26,11 @@ const { CLIENT_URL } = process.env;
 
 //Cors Option
 const corsOption = {
-  origin: ["http://localhost:3000"],
+  origin: [
+    "http://localhost:3000",
+    "https://easyapifrontend-1.onrender.com",
+    "https://easyapifrontend-1.onrender.com",
+  ],
   credentials: true,
 };
 
