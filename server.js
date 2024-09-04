@@ -30,6 +30,7 @@ const corsOption = {
     "http://localhost:3000",
     "https://easyapifrontend-1.onrender.com",
     "https://easyapifrontend-1.onrender.com",
+    "https://easy-apifrontend.vercel.app",
   ],
   credentials: true,
 };
