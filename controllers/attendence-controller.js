@@ -35,15 +35,7 @@ class AttendenceController {
     let { _id, empid, checkin, checkout, lateby, overtiming, remark } =
       req.body;
     // console.log(req.body);
-    if (
-      !_id ||
-      !empid ||
-      !checkin ||
-      !checkout ||
-      !lateby ||
-      !overtiming ||
-      !remark
-    )
+    if (!_id || !empid)
       return next(ErrorHandler.badRequest("All Fields Required"));
     const user = await AttendanceModalNew.findById({ _id: _id });
     if (!user) {
