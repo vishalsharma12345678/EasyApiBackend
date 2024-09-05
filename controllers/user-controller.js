@@ -5,13 +5,22 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const teamService = require("../services/team-service");
 const attendanceService = require("../services/attendance-service");
-
+const imagekit = require("../services/imagekit");
 class UserController {
   createUser = async (req, res, next) => {
     const file = req.file;
+    console.log(file);
+    let imgKit;
     let { name, email, password, type, address, mobile, pancard, addharCard } =
       req.body;
     const username = "user" + crypto.randomInt(11111111, 999999999);
+    if (file) {
+      imgKit = await imagekit.upload({
+        file: req.file.buffer,
+        fileName: req.file.originalname,
+        folder: "/employees",
+      });
+    }
     if (
       !name ||
       !email ||
@@ -19,7 +28,7 @@ class UserController {
       !password ||
       !type ||
       !address ||
-      !file ||
+      !imgKit.url ||
       !mobile ||
       !pancard ||
       !addharCard
@@ -53,7 +62,7 @@ class UserController {
       password,
       type,
       address,
-      image: file.filename,
+      image: imgKit.url,
       pancard: pancard,
       addharCard: addharCard,
     };
@@ -61,23 +70,32 @@ class UserController {
 
     if (!userResp)
       return next(ErrorHandler.serverError("Failed To Create An Account"));
+
     res.json({
       success: true,
       message: "User has been Added",
-      user: new UserDto(user),
+      // user: new UserDto(user),
     });
   };
 
   updateUser = async (req, res, next) => {
     const file = req.file;
-    const filename = file && file.filename;
+    let imgKit;
+    if (file) {
+      imgKit = await imagekit.upload({
+        file: req.file.buffer,
+        fileName: req.file.originalname,
+        folder: "/employees",
+      });
+    }
     let user, id;
     console.log(req.user.type);
     if (req.user.type === "admin") {
-      const { id } = req.params;
+      id = req.params.id;
       let { name, username, email, password, type, status, address, mobile } =
         req.body;
       type = type && type.toLowerCase();
+      console.log(req.body);
       if (!mongoose.Types.ObjectId.isValid(id))
         return next(ErrorHandler.badRequest("Invalid User Id"));
       if (type) {
@@ -138,7 +156,7 @@ class UserController {
         password,
         type,
         address,
-        image: filename,
+        image: imgKit.url,
       };
     } else {
       id = req.user._id;
@@ -148,12 +166,12 @@ class UserController {
         username,
         mobile,
         address,
-        image: filename,
+        image: imgKit.url,
       };
     }
-    // console.log(user);
+    console.log(id, user);
     const userResp = await userService.updateUser(id, user);
-    // console.log(userResp);
+    console.log(userResp);
     if (!userResp)
       return next(ErrorHandler.serverError("Failed To Update Account"));
     res.json({ success: true, message: "Account Updated" });

@@ -18,9 +18,7 @@ class UserDto {
       (this.username = user.username),
       (this.email = user.email),
       (this.mobile = user.mobile),
-      (this.image =
-        user.image &&
-        `https://easyapibackend-elwu.onrender.com/storage/images/profile/${user.image}`),
+      (this.image = user.image && user.image),
       (this.type =
         user.type && user.type.charAt(0).toUpperCase() + user.type.slice(1)),
       (this.address = user.address),

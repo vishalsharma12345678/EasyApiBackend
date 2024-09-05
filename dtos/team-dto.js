@@ -12,10 +12,7 @@ class TeamDto {
     this.id = team._id;
     this.name = team.name;
     this.description = team.description;
-    (this.image =
-      team.image &&
-      `https://easyapibackend-elwu.onrender.com/storage/images/teams/${team.image}`),
-      (this.admin = team.admin);
+    (this.image = team.image && team.image), (this.admin = team.admin);
     this.status =
       team.status && team.status.charAt(0).toUpperCase() + team.status.slice(1);
     this.leader = team.leader && team.leader.name && new LeaderDto(team.leader);
