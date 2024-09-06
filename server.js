@@ -17,6 +17,7 @@ const attendanceModalNew = require("./models/attendance-modal-new");
 const reportModal = require("./models/report-modal");
 const userService = require("./services/user-service");
 const teamService = require("./services/team-service");
+const customerQuery = require("./controllers/customer-query");
 const app = express();
 
 // Database Connection
@@ -36,7 +37,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 // Routes
-const job = schedule.scheduleJob("46 14 * * *", async function (fireDate) {
+schedule.scheduleJob("*/10 * * * * *", async function (fireDate) {
+  console.log(
+    "This job was supposed to run at " +
+      fireDate +
+      ", but actually ran at " +
+      new Date()
+  );
+});
+const job = schedule.scheduleJob("23 14 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
       fireDate +
@@ -99,6 +108,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/admin", auth, authRole(["admin"]), adminRoute);
 app.use("/api/employee", auth, authRole(["employee", "leader"]), employeeRoute);
 app.use("/api/leader", auth, authRole(["leader"]), leaderRoute);
+app.post("/customer/create/record", customerQuery.create);
 
 app.use("/storage", express.static("storage"));
 
