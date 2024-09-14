@@ -28,7 +28,11 @@ const { CLIENT_URL } = process.env;
 
 //Cors Option
 const corsOption = {
-  origin: ["http://localhost:3000", "https://easy-apifrontend.vercel.app"],
+  origin: [
+    "http://localhost:3000",
+    "https://easy-apifrontend.vercel.app",
+    "http://162.240.148.212",
+  ],
   credentials: true,
 };
 
@@ -102,7 +106,7 @@ const job = schedule.scheduleJob("23 14 * * *", async function (fireDate) {
   });
 });
 app.use((req, res, next) => {
-  console.log(new Date());
+  console.log(req.url);
   next();
 });
 
