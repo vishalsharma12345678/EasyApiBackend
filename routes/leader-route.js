@@ -13,8 +13,12 @@ router.patch(
 ); // Update Self Profile
 router.get("/team", asyncMiddleware(leaderController.getTeam)); // Team
 router.get("/team/members", asyncMiddleware(leaderController.getTeamMembers)); // Team Members
+router.get(
+  "/team/members/customer",
+  asyncMiddleware(leaderController.getTeamMembersCustomer)
+);
 router.post("/team/createReport", reportController.create); // upload daily report
 router.post("/team/findReport", reportController.find); // upload daily report
-router.post("/team/updateReport", reportController.update); // upload daily report
+router.post("/team/updateReport", reportController.update); //getTeamMembersCustomer upload daily report
 
 module.exports = router;

@@ -9,7 +9,6 @@ const imagekit = require("../services/imagekit");
 class UserController {
   createUser = async (req, res, next) => {
     const file = req.file;
-    console.log(file);
     let imgKit;
     let { name, email, password, type, address, mobile, pancard, addharCard } =
       req.body;
@@ -89,13 +88,11 @@ class UserController {
       });
     }
     let user, id;
-    console.log(req.user.type);
     if (req.user.type === "admin") {
       id = req.params.id;
       let { name, username, email, password, type, status, address, mobile } =
         req.body;
       type = type && type.toLowerCase();
-      console.log(req.body);
       if (!mongoose.Types.ObjectId.isValid(id))
         return next(ErrorHandler.badRequest("Invalid User Id"));
       if (type) {
@@ -169,9 +166,7 @@ class UserController {
         image: imgKit.url,
       };
     }
-    console.log(id, user);
     const userResp = await userService.updateUser(id, user);
-    console.log(userResp);
     if (!userResp)
       return next(ErrorHandler.serverError("Failed To Update Account"));
     res.json({ success: true, message: "Account Updated" });
@@ -197,7 +192,18 @@ class UserController {
       data: employees,
     });
   };
-
+  getallUser = async (req, res, next) => {
+    console.log("getallUser");
+    const data = await userService.findAllUser();
+    if (!data) {
+      return next(ErrorHandler.serverError("failed to fetch account"));
+    }
+    return res.json({
+      success: true,
+      message: "all users data retrieved",
+      data: data,
+    });
+  };
   getFreeEmployees = async (req, res, next) => {
     const emps = await userService.findUsers({ type: "employee", team: null });
     if (!emps || emps.length < 1)
@@ -298,7 +304,6 @@ class UserController {
         );
 
       const resp = await attendanceService.markAttendance(newAttendance);
-      console.log(resp);
       if (!resp)
         return next(ErrorHandler.serverError("Failed to mark attendance"));
 

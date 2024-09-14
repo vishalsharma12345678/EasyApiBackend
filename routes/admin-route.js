@@ -7,6 +7,7 @@ const attendenceController = require("../controllers/attendence-controller");
 const reportController = require("../controllers/report-controller");
 const ErrorHandler = require("../utils/error-handler");
 const reportModal = require("../models/report-modal");
+const queryController = require("../controllers/customer-query");
 const mongoose = require("mongoose");
 router.post(
   "/user",
@@ -22,12 +23,16 @@ router.post("/attendencefind", attendenceController.find);
 router.post("/oneEmpattendence", attendenceController.findoneAttencences);
 router.post("/attendenceUpdate", attendenceController.update);
 router.post("/findReport", reportController.find);
+router.get("/allcustomerAssiged", queryController.findallCustomer); // Admin
+router.get("/alluserdata", asyncMiddleware(userController.getallUser)); // Admin
+
 router.get("/employees", asyncMiddleware(userController.getUsers)); // Employees
 router.get("/employees/free", asyncMiddleware(userController.getFreeEmployees)); // Free Employees
 router.get("/employee/:id", asyncMiddleware(userController.getUser)); // Employee
 router.get("/user/:id", asyncMiddleware(userController.getUserNoFilter)); // User - No Filter (Admin,Leader,Employee)
 router.get("/admins", asyncMiddleware(userController.getUsers)); // Admins
 router.get("/admin/:id", asyncMiddleware(userController.getUser)); // Admin
+
 router.get("/leaders/free", asyncMiddleware(userController.getFreeLeaders)); // Free Leaders
 router.get("/leaders", asyncMiddleware(userController.getLeaders)); // Leaders
 router.get("/leader/:id", asyncMiddleware(userController.getUser)); // Leader

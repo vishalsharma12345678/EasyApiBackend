@@ -16,7 +16,6 @@ class DailyReport {
     res.send({ success: true, message: "Report saved successfully" });
   };
   find = async (req, res, next) => {
-    console.log(req.body);
     const { empid, date } = req.body;
     if (!empid) {
       return next(ErrorHandler.badRequest("Be a valid Login"));
@@ -52,12 +51,10 @@ class DailyReport {
       return next(ErrorHandler.badRequest("No Report found on this date"));
     }
     oldReport.teamReport = teamReport;
-    console.log(oldReport.teamReport);
     const result = await oldReport.save();
     if (!result) {
       return next(ErrorHandler.badRequest("Report not updated"));
     }
-    console.log(result);
     res.send({
       success: true,
       message: "Report saved successfully",

@@ -7,6 +7,10 @@ const CustomerQuerySchema = new Schema({
     required: true,
     trim: true,
   },
+  date: {
+    type: String,
+    default: new Date().toLocaleDateString(),
+  },
   email: {
     type: String,
     required: true,
@@ -23,10 +27,18 @@ const CustomerQuerySchema = new Schema({
     type: String,
     required: true,
   },
+  assiged: {
+    type: Boolean,
+    default: false,
+  },
+  leaderTeam: {
+    type: mongoose.Types.ObjectId,
+    ref: "Team",
+  },
   takeOverby: {
     type: mongoose.Types.ObjectId,
     ref: "User",
   },
 });
 
-module.exports = new mongoose.model("CustomerRequest", CustomerQuerySchema);
+module.exports = mongoose.model("CustomerRequest", CustomerQuerySchema);

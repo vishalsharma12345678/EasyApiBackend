@@ -12,6 +12,7 @@ class UserDto {
   team;
   pancard;
   addharCard;
+  custumerAssiged;
   constructor(user) {
     (this.id = user._id),
       (this.name = user.name),
@@ -33,7 +34,8 @@ class UserDto {
             : user.team
         )),
       (this.pancard = user.pancard),
-      (this.addharCard = user.addharCard);
+      (this.addharCard = user.addharCard),
+      (this.custumerAssiged = user.custumerAssiged);
   }
 }
 
