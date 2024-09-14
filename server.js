@@ -31,7 +31,7 @@ const corsOption = {
   origin: [
     "http://localhost:3000",
     "https://easy-apifrontend.vercel.app",
-    "http://162.240.148.212",
+    "http://162.240.148.212:3000",
   ],
   credentials: true,
 };
