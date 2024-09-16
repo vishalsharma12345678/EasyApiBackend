@@ -50,6 +50,7 @@ app.use(cookieParser());
 //       new Date()
 //   );
 // });
+
 const job = schedule.scheduleJob("23 14 * * *", async function (fireDate) {
   console.log(
     "This job was supposed to run at " +
@@ -109,7 +110,9 @@ app.use((req, res, next) => {
   console.log(req.url);
   next();
 });
-
+app.use("/", (req, res) => {
+  res.send("<h1>Hi vishal</h1>");
+});
 app.use("/api/auth", authRoute);
 app.use(
   "/api/common",
