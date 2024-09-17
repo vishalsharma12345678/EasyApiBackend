@@ -32,6 +32,7 @@ const corsOption = {
     "http://localhost:3000",
     "https://easy-apifrontend.vercel.app",
     "http://162.240.148.212:3000",
+    "http://usfrn.com:3000",
   ],
   credentials: true,
 };
@@ -110,9 +111,7 @@ app.use((req, res, next) => {
   console.log(req.url);
   next();
 });
-app.use("/", (req, res) => {
-  res.send("<h1>Hi vishal</h1>");
-});
+
 app.use("/api/auth", authRoute);
 app.use(
   "/api/common",
