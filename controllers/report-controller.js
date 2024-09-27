@@ -17,6 +17,7 @@ class DailyReport {
   };
   find = async (req, res, next) => {
     const { empid, date } = req.body;
+    console.log(req.body);
     if (!empid) {
       return next(ErrorHandler.badRequest("Be a valid Login"));
     }
@@ -27,6 +28,7 @@ class DailyReport {
       employeeID: new mongoose.Types.ObjectId(empid),
       date: date,
     });
+    console.log(Leaderreport);
     if (!Leaderreport) {
       return next(ErrorHandler.badRequest("No report found"));
     }

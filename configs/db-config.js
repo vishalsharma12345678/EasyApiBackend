@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const { DB_URL } = process.env;
-// mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.1
+// mongodb://vishal:vishal9368@162.240.148.212:27017/data
+//
 const dbConnection = () => {
   mongoose
-    .connect("mongodb://vishal:vishal9368@162.240.148.212:27017/data")
+    .connect(
+      "mongodb+srv://vshalsha1234:xf9Hig6gEFMkSX1q@cluster0.snveb.mongodb.net/data"
+    )
     .then(() => console.log("Database Connection Successfull"))
     .catch((err) =>
       console.log("Failed To Connect With Database, \nReason : " + err.message)

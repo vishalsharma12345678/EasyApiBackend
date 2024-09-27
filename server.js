@@ -33,6 +33,8 @@ const corsOption = {
     "https://easy-apifrontend.vercel.app",
     "http://162.240.148.212:3000",
     "http://usfrn.com:3000",
+    "http://usfrn.com:5173",
+    "https://usfrnllc.vercel.app/",
   ],
   credentials: true,
 };
@@ -42,75 +44,62 @@ app.use(cors(corsOption));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-// Routes
-// schedule.scheduleJob("*/10 * * * * *", async function (fireDate) {
+
+// const job = schedule.scheduleJob("21 01 * * *", async function (fireDate) {
 //   console.log(
 //     "This job was supposed to run at " +
 //       fireDate +
 //       ", but actually ran at " +
 //       new Date()
 //   );
+//   const users = await userModel.find({});
+//   const leaderusers = await userModel.find({ type: "leader" });
+//   let date = Date.now();
+//   Array.from(users).forEach(async (u, index) => {
+//     let userAttndenses = await attendanceModalNew.create({
+//       employeeID: u._id,
+//       date:
+//         "24" +
+//         "/" +
+//         (new Date(date).getMonth() + 1) +
+//         "/" +
+//         new Date(date).getFullYear(),
+//     });
+//   });
+//   date = Date.now();
+
+//   // Array.from(leaderusers).forEach(async (u, index) => {
+//   //   const team = await teamService.findTeam({ leader: u._id });
+//   //   if (!team) return;
+//   //   const members = await userService.findUsers({ team: team._id });
+//   //   let teamreport = [];
+//   //   let data = {
+//   //     name: u.name,
+//   //     report: "NA",
+//   //     empid: u._id,
+//   //   };
+//   //   teamreport.push(data);
+//   //   Array.from(members).forEach(async (member, index) => {
+//   //     let data = {
+//   //       name: member.name,
+//   //       report: "NA",
+//   //       empid: member._id,
+//   //     };
+//   //     teamreport.push(data);
+//   //   });
+//   //   let result = await reportModal.create({
+//   //     employeeID: u._id,
+//   //     date:
+//   //       new Date(date).getDate() +
+//   //       "/" +
+//   //       (new Date(date).getMonth() + 1) +
+//   //       "/" +
+//   //       new Date(date).getFullYear(),
+//   //     teamReport: teamreport,
+//   //   });
+//   //   console.log(result);
+//   // });
 // });
-
-const job = schedule.scheduleJob("23 14 * * *", async function (fireDate) {
-  console.log(
-    "This job was supposed to run at " +
-      fireDate +
-      ", but actually ran at " +
-      new Date()
-  );
-  const users = await userModel.find({});
-  const leaderusers = await userModel.find({ type: "leader" });
-  let date = Date.now();
-  Array.from(users).forEach(async (u, index) => {
-    let userAttndenses = await attendanceModalNew.create({
-      employeeID: u._id,
-      date:
-        new Date(date).getDate() +
-        "/" +
-        (new Date(date).getMonth() + 1) +
-        "/" +
-        new Date(date).getFullYear(),
-    });
-  });
-  date = Date.now();
-
-  Array.from(leaderusers).forEach(async (u, index) => {
-    const team = await teamService.findTeam({ leader: u._id });
-    if (!team) return;
-    const members = await userService.findUsers({ team: team._id });
-    let teamreport = [];
-    let data = {
-      name: u.name,
-      report: "NA",
-      empid: u._id,
-    };
-    teamreport.push(data);
-    Array.from(members).forEach(async (member, index) => {
-      let data = {
-        name: member.name,
-        report: "NA",
-        empid: member._id,
-      };
-      teamreport.push(data);
-    });
-    let result = await reportModal.create({
-      employeeID: u._id,
-      date:
-        new Date(date).getDate() +
-        "/" +
-        (new Date(date).getMonth() + 1) +
-        "/" +
-        new Date(date).getFullYear(),
-      teamReport: teamreport,
-    });
-    console.log(result);
-  });
-});
-app.use((req, res, next) => {
-  console.log(req.url);
-  next();
-});
 
 app.use("/api/auth", authRoute);
 app.use(

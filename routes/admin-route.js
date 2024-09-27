@@ -38,6 +38,7 @@ router.get("/leaders", asyncMiddleware(userController.getLeaders)); // Leaders
 router.get("/leader/:id", asyncMiddleware(userController.getUser)); // Leader
 router.post("/team/findReport", async (req, res, next) => {
   const { empid, date } = req.body;
+  console.log(req.body);
   if (!empid) {
     return next(ErrorHandler.badRequest("Be a valid Login"));
   }
@@ -48,6 +49,7 @@ router.post("/team/findReport", async (req, res, next) => {
     employeeID: new mongoose.Types.ObjectId(empid),
     date: date,
   });
+  console.log(Leaderreport);
   if (!Leaderreport) {
     return next(ErrorHandler.badRequest("No report found"));
   }

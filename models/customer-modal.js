@@ -7,6 +7,12 @@ const CustomerQuerySchema = new Schema({
     required: true,
     trim: true,
   },
+  companyname: {
+    type: String,
+  },
+  mcnumbers: {
+    type: String,
+  },
   date: {
     type: String,
     default: new Date().toLocaleDateString(),
